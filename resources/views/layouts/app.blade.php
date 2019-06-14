@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/main.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -74,7 +75,16 @@
                 </div>
             </div>
         </nav>
-
+        @if (session('msg_success'))
+            <div class="flash_message alert-success text-center py-3 my-0">
+                {{ session('msg_success') }}
+            </div>
+        @endif
+        @if (session('msg_failure'))
+            <div class="flash_message alert-danger text-center py-3 my-0">
+                {{ session('msg_failure') }}
+            </div>
+        @endif
         <main class="py-4">
             @yield('content')
         </main>
