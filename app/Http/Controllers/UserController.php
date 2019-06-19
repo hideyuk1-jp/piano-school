@@ -58,7 +58,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -70,7 +70,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->name = $request->name;
+        $user->save();
+        session()->flash('msg_success', 'ユーザー情報を更新しました');
+        return redirect('users/'.$user->id);
     }
 
     /**
