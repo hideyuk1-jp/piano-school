@@ -42,6 +42,7 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->password = $request->password;
         $user->save();
+        session()->flash('msg_success', 'ユーザーを新規追加しました');
         return redirect('users/'.$user->id);
     }
 
