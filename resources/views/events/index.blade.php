@@ -15,8 +15,8 @@
                     <th>{{ __('ID') }}</th>
                     <th>{{ __('Title') }}</th>
                     <th>{{ __('Date') }}</th>
-                    <th>{{ __('description') }}</th>
-                    <th>{{ __('user_id') }}</th>
+                    <th>{{ __('Description') }}</th>
+                    <th>{{ __('User_id') }}</th>
                 </tr>
             </thead>
             <tbody>

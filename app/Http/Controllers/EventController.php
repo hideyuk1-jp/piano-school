@@ -45,9 +45,9 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Event $event)
     {
-        //
+        return view('events.show', ['event' => $event]);
     }
 
     /**
