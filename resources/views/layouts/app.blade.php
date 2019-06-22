@@ -39,7 +39,7 @@
                         @guest
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="">発表会一覧</a>
+                                <a class="nav-link" href="{{ route('events.index') }}">発表会一覧</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="">発表一覧</a>
