@@ -56,9 +56,9 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Event $event)
     {
-        //
+        return view('events.edit', ['event' => $event]);
     }
 
     /**
@@ -68,9 +68,14 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Event $event)
     {
-        //
+        $event->title = $request->title;
+        $event->date = $request->date;
+        $event->description = $request->description;
+        $event->save();
+        session()->flash('msg_success', 'イベント情報を更新しました');
+        return redirect('events/'.$event->id);
     }
 
     /**
