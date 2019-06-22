@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -25,7 +26,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('events.create');
     }
 
     /**
@@ -36,7 +37,14 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $event = new event;
+        $event->title = $request->title;
+        $event->date = $request->date;
+        $event->description = $request->description;
+        $event->user_id = Auth::id();
+        $event->save();
+        session()->flash('msg_success', 'イベントを新規追加しました');
+        return redirect('events/'.$event->id);
     }
 
     /**
