@@ -26,7 +26,7 @@ class MusicController extends Controller
      */
     public function create()
     {
-        //
+        return view('musics.create');
     }
 
     /**
@@ -37,7 +37,13 @@ class MusicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $music = new music;
+        $music->title = $request->title;
+        $music->composer = $request->composer;
+        $music->limit = $request->limit;
+        $music->save();
+        session()->flash('msg_success', '曲を新規追加しました');
+        return redirect('musics/'.$music->id);
     }
 
     /**
