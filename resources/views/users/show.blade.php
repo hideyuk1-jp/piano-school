@@ -19,11 +19,11 @@
     </dl>
 
     {{-- 編集・削除ボタン --}}
-    <div>
+    <div class="mb-4">
         <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
             {{ __('Edit') }}
         </a>
-    
+
         <a href="#" class="btn btn-danger" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">
             {{ __('Delete') }}
         </a>
@@ -53,6 +53,33 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+    </div>
+
+    {{-- ユーザーが作成した発表会一覧 --}}
+    <div class="mb-4">
+        <h2>作成した発表会</h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ __('ID') }}</th>
+                        <th>{{ __('Title') }}</th>
+                        <th>{{ __('Date') }}</th>
+                        <th>{{ __('Description') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($user->events as $event)
+                        <tr>
+                            <td>{{ $event->id }}</td>
+                            <td><a href="{{ url('events/'.$event->id) }}">{{ $event->title }}</a></td>
+                            <td>{{ $event->date }}</td>
+                            <td>{{ $event->description }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 @endsection

@@ -16,7 +16,7 @@
                     <th>{{ __('Title') }}</th>
                     <th>{{ __('Date') }}</th>
                     <th>{{ __('Description') }}</th>
-                    <th>{{ __('User_id') }}</th>
+                    <th>{{ __('Created by') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +26,7 @@
                         <td><a href="{{ url('events/'.$event->id) }}">{{ $event->title }}</a></td>
                         <td>{{ $event->date }}</td>
                         <td>{{ $event->description }}</td>
-                        <td>{{ $event->user_id }}</td>
+                        <td><a href="{{ url('users/'.$event->user_id) }}">{{ $event->user->name }}</a></td>
                     </tr>
                 @endforeach
             </tbody>
