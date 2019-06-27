@@ -46,9 +46,9 @@ class MusicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Music $music)
     {
-        //
+        return view('musics.show', ['music' => $music]);
     }
 
     /**
