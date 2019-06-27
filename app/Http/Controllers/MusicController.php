@@ -63,9 +63,9 @@ class MusicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Music $music)
     {
-        //
+        return view('musics.edit', ['music' => $music]);
     }
 
     /**
@@ -75,9 +75,14 @@ class MusicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Music $music)
     {
-        //
+        $music->title = $request->title;
+        $music->composer = $request->composer;
+        $music->limit = $request->limit;
+        $music->save();
+        session()->flash('msg_success', '曲を更新しました');
+        return redirect('musics/'.$music->id);
     }
 
     /**
