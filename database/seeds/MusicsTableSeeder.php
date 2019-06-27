@@ -30,7 +30,7 @@ class MusicsTableSeeder extends Seeder
             'composer' => 'ドビュッシー',
             'limit' => 1
         ]);
-        // 3
+        // 4
         Music::create([
             'title' => 'メヌエット　ト長調',
             'composer' => 'バッハ',
