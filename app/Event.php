@@ -15,4 +15,9 @@ class Event extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function performances() // 複数形
+    {
+        return $this->hasMany('App\Performance')->latest();
+    }
 }

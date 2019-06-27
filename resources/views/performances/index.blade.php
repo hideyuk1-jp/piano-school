@@ -16,6 +16,7 @@
                     <th>{{ __('Performer') }}</th>
                     <th>{{ __('Event') }}</th>
                     <th>{{ __('Music') }}</th>
+                    <th>{{ __('Composer') }}</th>
                     <th>{{ __('Created by') }}</th>
                 </tr>
             </thead>
@@ -23,10 +24,11 @@
                 @foreach ($performances as $performance)
                     <tr>
                         <td>{{ $performance->id }}</td>
-                        <td><a href="{{ url('performances/'.$performance->id) }}">{{ $performance->performer_id }}</a></td>
-                        <td>{{ $performance->event_id }}</td>
-                        <td>{{ $performance->music_id }}</td>
-                        <td>{{ $performance->user_id }}</td>
+                        <td><a href="{{ url('performances/'.$performance->id) }}">{{ $performance->performer->name }}</a></td>
+                        <td>{{ $performance->event->title }}</td>
+                        <td>{{ $performance->music->title }}</td>
+                        <td>{{ $performance->music->composer }}</td>
+                        <td>{{ $performance->user->name }}</td>
                     </tr>
                 @endforeach
             </tbody>

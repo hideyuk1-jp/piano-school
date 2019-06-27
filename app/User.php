@@ -41,4 +41,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Event')->latest();
     }
+
+    public function performances() // 複数形
+    {
+        return $this->hasMany('App\Performance', 'performer_id')->latest();
+    }
+
+    public function created_performances() // 複数形
+    {
+        return $this->hasMany('App\Performance')->latest();
+    }
 }
