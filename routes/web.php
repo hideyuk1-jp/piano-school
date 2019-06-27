@@ -22,3 +22,5 @@ Route::resource('users', 'UserController');
 Route::resource('events', 'EventController');
 
 Route::resource('musics', 'MusicController');
+
+Route::resource('performances', 'PerformanceController');
