@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Performance;
 
 class PerformanceController extends Controller
 {
@@ -13,7 +14,9 @@ class PerformanceController extends Controller
      */
     public function index()
     {
-        //
+        $performances = Performance::latest()->get();
+
+        return view('performances.index', ['performances' => $performances]);
     }
 
     /**
