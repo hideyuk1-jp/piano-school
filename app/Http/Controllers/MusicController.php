@@ -91,8 +91,10 @@ class MusicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Music $music)
     {
-        //
+        $music->delete();
+        session()->flash('msg_success', '曲を削除しました');
+        return redirect('musics');
     }
 }
