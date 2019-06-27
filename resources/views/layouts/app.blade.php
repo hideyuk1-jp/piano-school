@@ -48,7 +48,7 @@
                                 <a class="nav-link" href="{{ route('users.index') }}">ユーザー一覧</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">曲一覧</a>
+                                <a class="nav-link" href="{{ route('musics.index') }}">曲一覧</a>
                             </li>
                         @endguest
                     </ul>
