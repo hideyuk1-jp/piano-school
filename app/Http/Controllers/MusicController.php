@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Music;
 
 class MusicController extends Controller
 {
@@ -13,7 +14,9 @@ class MusicController extends Controller
      */
     public function index()
     {
-        //
+        $musics = Music::latest()->get();
+
+        return view('musics.index', ['musics' => $musics]);
     }
 
     /**
