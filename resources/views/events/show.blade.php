@@ -16,8 +16,8 @@
         <dd class="col-md-8">{{ $event->date }}</dd>
         <dt class="col-md-4">{{ __('Description') }}</dt>
         <dd class="col-md-8">{{ $event->description }}</dd>
-        <dt class="col-md-4">{{ __('User_id') }}</dt>
-        <dd class="col-md-8">{{ $event->user_id }}</dd>
+        <dt class="col-md-4">{{ __('Created by') }}</dt>
+        <dd class="col-md-8"><a href="{{ url('users/'.$event->user_id) }}">{{ $event->user->name }}</a></dd>
     </dl>
 
     {{-- 編集・削除ボタン --}}
@@ -25,7 +25,7 @@
         <a href="{{ url('events/'.$event->id.'/edit') }}" class="btn btn-primary">
             {{ __('Edit') }}
         </a>
-    
+
         <a href="#" class="btn btn-danger" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">
             {{ __('Delete') }}
         </a>
