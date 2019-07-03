@@ -16,6 +16,7 @@
 
                             <div class="col-md-6">
                                 <select name="performer" id="performer" class="form-control @error('performer') is-invalid @enderror" required autocomplete="performer">
+                                    <option value="">{{ __('選択してください') }}</option>
                                     @foreach ($performers as $performer)
                                         <option value="{{ $performer->id }}">{{ $performer->name }}</option>
                                     @endforeach
@@ -34,6 +35,7 @@
 
                             <div class="col-md-6">
                                 <select name="music" id="music" class="form-control @error('music') is-invalid @enderror" required autocomplete="music">
+                                    <option value="">{{ __('選択してください') }}</option>
                                     @foreach ($musics as $music)
                                         <option value="{{ $music->id }}">{{ $music->title }} （{{ $music->composer }}）</option>
                                     @endforeach
@@ -53,6 +55,7 @@
 
                             <div class="col-md-6">
                                 <select name="event" id="event" class="form-control @error('event') is-invalid @enderror" required autocomplete="event">
+                                    <option value="">{{ __('選択してください') }}</option>
                                     @foreach ($events as $event)
                                         <option value="{{ $event->id }}">{{ $event->title }} （{{ $event->date }}）</option>
                                     @endforeach

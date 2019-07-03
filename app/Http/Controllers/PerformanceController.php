@@ -72,9 +72,13 @@ class PerformanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Performance $performance)
     {
-        //
+        $performers = User::where('role', 15)->get();
+        $musics = Music::all();
+        $events = Event::all();
+
+        return view('performances.edit', ['performance' => $performance, 'performers' => $performers, 'musics' => $musics, 'events' => $events]);
     }
 
     /**
@@ -84,9 +88,14 @@ class PerformanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Performance $performance)
     {
-        //
+        $performance->performer_id = $request->performer;
+        $performance->music_id = $request->music;
+        $performance->event_id = $request->event;
+        $performance->save();
+        session()->flash('msg_success', '発表を更新しました');
+        return redirect('performances/'.$performance->id);
     }
 
     /**
