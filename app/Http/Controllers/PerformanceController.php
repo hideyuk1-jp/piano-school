@@ -104,8 +104,10 @@ class PerformanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Performance $performance)
     {
-        //
+        $performance->delete();
+        session()->flash('msg_success', '発表を削除しました');
+        return redirect('performances');
     }
 }
