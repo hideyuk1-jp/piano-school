@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Performance;
+use App\User;
+use App\Music;
+use App\Event;
+use Illuminate\Support\Facades\Auth;
 
 class PerformanceController extends Controller
 {
@@ -14,7 +18,7 @@ class PerformanceController extends Controller
      */
     public function index()
     {
-        $performances = Performance::latest()->get();
+        $performances = Performance::all();
 
         return view('performances.index', ['performances' => $performances]);
     }
@@ -26,7 +30,11 @@ class PerformanceController extends Controller
      */
     public function create()
     {
-        //
+        $performers = User::where('role', 15)->get();
+        $musics = Music::all();
+        $events = Event::all();
+
+        return view('performances.create', ['performers' => $performers, 'musics' => $musics, 'events' => $events]);
     }
 
     /**
@@ -37,7 +45,14 @@ class PerformanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $performance = new Performance;
+        $performance->performer_id = $request->performer;
+        $performance->music_id = $request->music;
+        $performance->event_id = $request->event;
+        $performance->user_id = Auth::id();
+        $performance->save();
+        session()->flash('msg_success', '発表を新規追加しました');
+        return redirect('performances/'.$performance->id);
     }
 
     /**
