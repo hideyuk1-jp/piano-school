@@ -15,8 +15,8 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 
 Auth::routes();
 
-// 講師以上のみ許可
-Route::group(['middleware' => ['auth', 'can:teacher-higher']], function () {
+// 生徒以上を許可
+Route::group(['middleware' => ['auth', 'can:student-higher']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 });
 
