@@ -1,28 +1,26 @@
-@extends('layouts.app')
+@extends('admin.app')
 @php
-    $title = __('Events').': '.$event->title;
+    $title = __('Musics').': '.$music->title;
 @endphp
 @section('content')
 <div class="container">
     <h1>{{ $title }}</h1>
 
-    {{-- イベント1件の情報 --}}
+    {{-- 曲1件の情報 --}}
     <dl class="row">
         <dt class="col-md-4">{{ __('ID') }}</dt>
-        <dd class="col-md-8">{{ $event->id }}</dd>
+        <dd class="col-md-8">{{ $music->id }}</dd>
         <dt class="col-md-4">{{ __('Title') }}</dt>
-        <dd class="col-md-8">{{ $event->title }}</dd>
-        <dt class="col-md-4">{{ __('Date') }}</dt>
-        <dd class="col-md-8">{{ $event->date }}</dd>
-        <dt class="col-md-4">{{ __('Description') }}</dt>
-        <dd class="col-md-8">{{ $event->description }}</dd>
-        <dt class="col-md-4">{{ __('Created by') }}</dt>
-        <dd class="col-md-8"><a href="{{ url('users/'.$event->user_id) }}">{{ $event->user->name }}</a></dd>
+        <dd class="col-md-8">{{ $music->title }}</dd>
+        <dt class="col-md-4">{{ __('Composer') }}</dt>
+        <dd class="col-md-8">{{ $music->composer }}</dd>
+        <dt class="col-md-4">{{ __('Limit') }}</dt>
+        <dd class="col-md-8">{{ $music->limit }}</dd>
     </dl>
 
     {{-- 編集・削除ボタン --}}
     <div>
-        <a href="{{ url('events/'.$event->id.'/edit') }}" class="btn btn-primary">
+        <a href="{{ url('musics/'.$music->id.'admin//edit') }}" class="btn btn-primary">
             {{ __('Edit') }}
         </a>
 
@@ -34,17 +32,17 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">イベントの削除</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">曲の削除</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>{{ __('message.delete', ['title' => $event->title]) }}</p>
+                        <p>{{ __('message.delete', ['title' => $music->title]) }}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
-                        <form style="display:inline" action="{{ url('events/'.$event->id) }}" method="post">
+                        <form style="display:inline" action="{{ url('musics/'.$music->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Performance;
 use App\User;
@@ -20,7 +21,7 @@ class PerformanceController extends Controller
     {
         $performances = Performance::all();
 
-        return view('performances.index', ['performances' => $performances]);
+        return view('admin.performances.index', ['performances' => $performances]);
     }
 
     /**
@@ -34,7 +35,7 @@ class PerformanceController extends Controller
         $musics = Music::all();
         $events = Event::all();
 
-        return view('performances.create', ['performers' => $performers, 'musics' => $musics, 'events' => $events]);
+        return view('admin.performances.create', ['performers' => $performers, 'musics' => $musics, 'events' => $events]);
     }
 
     /**
@@ -52,7 +53,7 @@ class PerformanceController extends Controller
         $performance->user_id = Auth::id();
         $performance->save();
         session()->flash('msg_success', '発表を新規追加しました');
-        return redirect('performances/'.$performance->id);
+        return redirect('admin/performances/'.$performance->id);
     }
 
     /**
@@ -63,7 +64,7 @@ class PerformanceController extends Controller
      */
     public function show(Performance $performance)
     {
-        return view('performances.show', ['performance' => $performance]);
+        return view('admin.performances.show', ['performance' => $performance]);
     }
 
     /**
@@ -78,7 +79,7 @@ class PerformanceController extends Controller
         $musics = Music::all();
         $events = Event::all();
 
-        return view('performances.edit', ['performance' => $performance, 'performers' => $performers, 'musics' => $musics, 'events' => $events]);
+        return view('admin.performances.edit', ['performance' => $performance, 'performers' => $performers, 'musics' => $musics, 'events' => $events]);
     }
 
     /**
@@ -95,7 +96,7 @@ class PerformanceController extends Controller
         $performance->event_id = $request->event;
         $performance->save();
         session()->flash('msg_success', '発表を更新しました');
-        return redirect('performances/'.$performance->id);
+        return redirect('admin/performances/'.$performance->id);
     }
 
     /**
@@ -108,6 +109,6 @@ class PerformanceController extends Controller
     {
         $performance->delete();
         session()->flash('msg_success', '発表を削除しました');
-        return redirect('performances');
+        return redirect('admin/performances');
     }
 }

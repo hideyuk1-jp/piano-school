@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.app')
 @php
     $title = __('Users').': '.$user->name;
 @endphp
@@ -20,7 +20,7 @@
 
     {{-- 編集・削除ボタン --}}
     <div class="mb-4">
-        <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
+        <a href="{{ url('admin/users/'.$user->id.'/edit') }}" class="btn btn-primary">
             {{ __('Edit') }}
         </a>
 
@@ -42,7 +42,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
-                        <form style="display:inline" action="{{ url('users/'.$user->id) }}" method="post">
+                        <form style="display:inline" action="{{ url('admin/users/'.$user->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">

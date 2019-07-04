@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Music;
 
@@ -16,7 +17,7 @@ class MusicController extends Controller
     {
         $musics = Music::latest()->get();
 
-        return view('musics.index', ['musics' => $musics]);
+        return view('admin.musics.index', ['musics' => $musics]);
     }
 
     /**
@@ -26,7 +27,7 @@ class MusicController extends Controller
      */
     public function create()
     {
-        return view('musics.create');
+        return view('admin.musics.create');
     }
 
     /**
@@ -43,7 +44,7 @@ class MusicController extends Controller
         $music->limit = $request->limit;
         $music->save();
         session()->flash('msg_success', '曲を新規追加しました');
-        return redirect('musics/'.$music->id);
+        return redirect('admin/musics/'.$music->id);
     }
 
     /**
@@ -54,7 +55,7 @@ class MusicController extends Controller
      */
     public function show(Music $music)
     {
-        return view('musics.show', ['music' => $music]);
+        return view('admin.musics.show', ['music' => $music]);
     }
 
     /**
@@ -65,7 +66,7 @@ class MusicController extends Controller
      */
     public function edit(Music $music)
     {
-        return view('musics.edit', ['music' => $music]);
+        return view('admin.musics.edit', ['music' => $music]);
     }
 
     /**
@@ -82,7 +83,7 @@ class MusicController extends Controller
         $music->limit = $request->limit;
         $music->save();
         session()->flash('msg_success', '曲を更新しました');
-        return redirect('musics/'.$music->id);
+        return redirect('admin/musics/'.$music->id);
     }
 
     /**
@@ -95,6 +96,6 @@ class MusicController extends Controller
     {
         $music->delete();
         session()->flash('msg_success', '曲を削除しました');
-        return redirect('musics');
+        return redirect('admin/musics');
     }
 }

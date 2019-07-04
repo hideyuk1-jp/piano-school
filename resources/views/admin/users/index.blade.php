@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.app')
 @php
     $title = __('Users');
 @endphp
@@ -6,7 +6,7 @@
 <div class="container">
     <div class="d-flex align-items-end">
     <h1>{{ $title }}</h1>
-    <a class="btn btn-primary mb-2 ml-auto" href="{{ route('users.create') }}">ユーザーの新規追加</a>
+    <a class="btn btn-primary mb-2 ml-auto" href="{{ route('admin.users.create') }}">ユーザーの新規追加</a>
     </div>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -21,7 +21,7 @@
                 @foreach ($users as $user)
                     <tr>
                         <td>{{ $user->id }}</td>
-                        <td><a href="{{ url('users/'.$user->id) }}">{{ $user->name }}</a></td>
+                        <td><a href="{{ url('admin/users/'.$user->id) }}">{{ $user->name }}</a></td>
                         <td>{{ $user->role }}</td>
                     </tr>
                 @endforeach
