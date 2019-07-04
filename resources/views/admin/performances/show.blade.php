@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.app')
 @php
     $title = __('Performances').': '.$performance->id;
 @endphp
@@ -11,18 +11,18 @@
         <dt class="col-md-4">{{ __('ID') }}</dt>
         <dd class="col-md-8">{{ $performance->id }}</dd>
         <dt class="col-md-4">{{ __('Performer') }}</dt>
-        <dd class="col-md-8"><a href="{{ url('users/'.$performance->performer_id) }}">{{ $performance->performer->name }}</a></dd>
+        <dd class="col-md-8"><a href="{{ url('admin/users/'.$performance->performer_id) }}">{{ $performance->performer->name }}</a></dd>
         <dt class="col-md-4">{{ __('Music') }}</dt>
         <dd class="col-md-8"><a href="{{ url('musics/'.$performance->music_id) }}">{{ $performance->music->title }}</a></dd>
         <dt class="col-md-4">{{ __('Event') }}</dt>
         <dd class="col-md-8"><a href="{{ url('events/'.$performance->event_id) }}">{{ $performance->event->title }}</a></dd>
         <dt class="col-md-4">{{ __('Created by') }}</dt>
-        <dd class="col-md-8"><a href="{{ url('users/'.$performance->user_id) }}">{{ $performance->user->name }}</a></dd>
+        <dd class="col-md-8"><a href="{{ url('admin/users/'.$performance->user_id) }}">{{ $performance->user->name }}</a></dd>
     </dl>
 
     {{-- 編集・削除ボタン --}}
     <div>
-        <a href="{{ url('performances/'.$performance->id.'/edit') }}" class="btn btn-primary">
+        <a href="{{ url('admin/performances/'.$performance->id.'/edit') }}" class="btn btn-primary">
             {{ __('Edit') }}
         </a>
 
@@ -44,7 +44,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Close') }}</button>
-                        <form style="display:inline" action="{{ url('performances/'.$performance->id) }}" method="post">
+                        <form style="display:inline" action="{{ url('admin/performances/'.$performance->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">

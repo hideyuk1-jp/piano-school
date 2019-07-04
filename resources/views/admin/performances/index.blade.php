@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.app')
 @php
     $title = __('Performances');
 @endphp
@@ -6,7 +6,7 @@
 <div class="container">
     <div class="d-flex align-items-end">
     <h1>{{ $title }}</h1>
-    <a class="btn btn-primary mb-2 ml-auto" href="{{ route('performances.create') }}">発表の新規追加</a>
+    <a class="btn btn-primary mb-2 ml-auto" href="{{ route('admin.performances.create') }}">発表の新規追加</a>
     </div>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -24,7 +24,7 @@
                 @foreach ($performances as $performance)
                     <tr>
                         <td>{{ $performance->id }}</td>
-                        <td><a href="{{ url('performances/'.$performance->id) }}">{{ $performance->performer->name }}</a></td>
+                        <td><a href="{{ url('admin/performances/'.$performance->id) }}">{{ $performance->performer->name }}</a></td>
                         <td>{{ $performance->event->title }}</td>
                         <td>{{ $performance->music->title }}</td>
                         <td>{{ $performance->music->composer }}</td>

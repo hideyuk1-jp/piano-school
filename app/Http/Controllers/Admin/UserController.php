@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -15,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('users.index', ['users' => $users]);
+        return view('admin.users.index', ['users' => $users]);
     }
 
     /**
@@ -25,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('admin.users.create');
     }
 
     /**
@@ -43,7 +44,7 @@ class UserController extends Controller
         $user->password = $request->password;
         $user->save();
         session()->flash('msg_success', 'ユーザーを新規追加しました');
-        return redirect('users/'.$user->id);
+        return redirect('admin/users/'.$user->id);
     }
 
     /**
@@ -54,7 +55,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', ['user' => $user]);
+        return view('admin.users.show', ['user' => $user]);
     }
 
     /**
@@ -65,7 +66,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', ['user' => $user]);
+        return view('admin.users.edit', ['user' => $user]);
     }
 
     /**
@@ -80,7 +81,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->save();
         session()->flash('msg_success', 'ユーザー情報を更新しました');
-        return redirect('users/'.$user->id);
+        return redirect('admin/users/'.$user->id);
     }
 
     /**
@@ -93,6 +94,6 @@ class UserController extends Controller
     {
         $user->delete();
         session()->flash('msg_success', 'ユーザーを削除しました');
-        return redirect('users');
+        return redirect('admin/users');
     }
 }

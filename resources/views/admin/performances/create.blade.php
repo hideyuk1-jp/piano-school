@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.app')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Performance') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('performances.store') }}">
+                    <form method="POST" action="{{ route('admin.performances.store') }}">
                         @csrf
 
                         <div class="form-group row">

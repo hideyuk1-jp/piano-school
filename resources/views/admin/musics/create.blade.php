@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.app')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Music') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('musics.store') }}">
+                    <form method="POST" action="{{ route('admin.musics.store') }}">
                         @csrf
 
                         <div class="form-group row">

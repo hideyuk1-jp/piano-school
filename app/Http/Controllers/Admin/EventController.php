@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Event;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::all();
-        return view('events.index', ['events' => $events]);
+        return view('admin.events.index', ['events' => $events]);
     }
 
     /**
@@ -26,7 +27,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('events.create');
+        return view('admin.events.create');
     }
 
     /**
@@ -44,7 +45,7 @@ class EventController extends Controller
         $event->user_id = Auth::id();
         $event->save();
         session()->flash('msg_success', 'イベントを新規追加しました');
-        return redirect('events/'.$event->id);
+        return redirect('admin/events/'.$event->id);
     }
 
     /**
@@ -55,7 +56,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        return view('events.show', ['event' => $event]);
+        return view('admin.events.show', ['event' => $event]);
     }
 
     /**
@@ -66,7 +67,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        return view('events.edit', ['event' => $event]);
+        return view('admin.events.edit', ['event' => $event]);
     }
 
     /**
@@ -83,7 +84,7 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->save();
         session()->flash('msg_success', 'イベント情報を更新しました');
-        return redirect('events/'.$event->id);
+        return redirect('admin/events/'.$event->id);
     }
 
     /**
@@ -96,6 +97,6 @@ class EventController extends Controller
     {
         $event->delete();
         session()->flash('msg_success', 'イベントを削除しました');
-        return redirect('events');
+        return redirect('admin/events');
     }
 }

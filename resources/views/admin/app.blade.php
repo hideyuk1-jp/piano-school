@@ -23,10 +23,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    ピアノ発表会アプリ
+                <a class="navbar-brand d-flex flex-row align-items-center" href="{{ url('admin/performances') }}">
+                    <span class="mr-1">ピアノ発表会アプリ</span><span class="badge badge-success">Admin</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -38,6 +38,18 @@
                         <!-- Authentication Links -->
                         @guest
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.events.index') }}">発表会</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.performances.index') }}">発表</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.users.index') }}">ユーザー</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.musics.index') }}">曲</a>
+                            </li>
                         @endguest
                     </ul>
 
@@ -55,10 +67,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('admin.events.index') }}">
-                                        管理画面
+                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                        通常画面
                                     </a>
-
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

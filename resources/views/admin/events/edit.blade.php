@@ -1,11 +1,11 @@
 @php
     $title = __('Edit').': '.$event->title;
 @endphp
-@extends('layouts.app')
+@extends('admin.app')
 @section('content')
 <div class="container">
     <h1>{{ $title }}</h1>
-    <form action="{{ url('events/'.$event->id) }}" method="post">
+    <form action="{{ url('admin/events/'.$event->id) }}" method="post">
         @csrf
         @method('PUT')
         <div class="form-group">
