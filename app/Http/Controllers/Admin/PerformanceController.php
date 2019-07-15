@@ -46,6 +46,14 @@ class PerformanceController extends Controller
      */
     public function store(Request $request)
     {
+        $count = Performance::where('music_id', $request->music)->where('event_id', $request->event)->count();
+        $limit = Music::find($request->music)->limit;
+
+        if ($count >= $limit) {
+            session()->flash('msg_failure', '曲数が上限に達しています');
+            return redirect('admin/performances/create');
+        }
+
         $performance = new Performance;
         $performance->performer_id = $request->performer;
         $performance->music_id = $request->music;
