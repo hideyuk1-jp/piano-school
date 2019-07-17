@@ -18,6 +18,26 @@ Auth::routes();
 // 生徒以上を許可
 Route::group(['middleware' => ['auth', 'can:student-higher']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::resource('events', 'EventController')->names([
+        'index' => 'events.index',
+        'create' => 'events.create',
+        'store' => 'events.store',
+        'show' => 'events.show',
+        'edit' => 'events.edit',
+        'update' => 'events.update',
+        'destroy' => 'events.destroy'
+    ]);
+
+    Route::resource('performances', 'PerformanceController')->names([
+        'index' => 'performances.index',
+        'create' => 'performances.create',
+        'store' => 'performances.store',
+        'show' => 'performances.show',
+        'edit' => 'performances.edit',
+        'update' => 'performances.update',
+        'destroy' => 'performances.destroy'
+    ]);
 });
 
 // 管理者以上のみ許可
