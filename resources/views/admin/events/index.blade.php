@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="d-flex align-items-end border-bottom pb-2 mb-4">
-        <h2 class="mb-0">{{ __('発表会') }}</h2>
-        <a class="btn btn-primary ml-auto" href="{{ route('admin.events.create') }}">発表会を追加</a>
+        <h2 class="h4 mb-0">{{ __('発表会') }}</h2>
+        <a class="btn btn-primary btn-sm ml-auto" href="{{ route('admin.events.create') }}">発表会を追加</a>
     </div>
     <div class="table-responsive">
         <table class="table table-hover">
@@ -20,7 +20,7 @@
                         <tr data-href="{{ url('admin/events/'.$event->id) }}">
                             <td>{{ $event->date }}</td>
                             <td>{{ $event->title }}</a></td>
-                            <td><a href="{{ url('admin/users/'.$event->user_id) }}">{{ $event->user->name }}</td>
+                            <td><a href="{{ url('admin/users/'.$event->user_id) }}">{{ $event->user->name }}</a></td>
                         </tr>
                     @endforeach
                 @else

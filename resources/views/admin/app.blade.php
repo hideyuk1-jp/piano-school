@@ -26,7 +26,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex flex-row align-items-center" href="{{ url('admin/performances') }}">
+                <a class="navbar-brand d-flex flex-row align-items-center" href="{{ url('admin') }}">
                     <span class="mr-1">{{ __('ピアノ発表会アプリ') }}</span><span class="badge badge-success">Admin</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
