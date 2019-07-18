@@ -44,6 +44,8 @@
     <dl class="row mb-0">
         <dt class="col-md-4">{{ __('ID') }}</dt>
         <dd class="col-md-8">{{ $event->id }}</dd>
+        <dt class="col-md-4">{{ __('タイトル') }}</dt>
+        <dd class="col-md-8">{{ $event->title }}</dd>
         <dt class="col-md-4">{{ __('日付') }}</dt>
         <dd class="col-md-8">{{ $event->date }}</dd>
         <dt class="col-md-4">{{ __('詳細') }}</dt>
