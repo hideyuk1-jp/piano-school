@@ -84,7 +84,7 @@
         <div class="container mt-4">
             <div class="row">
                 <div class="col-lg-4">
-                    <ul class="list-group">
+                    <ul class="list-group mb-4">
                         @php
                             $flag = [
                                 "events" => Request::is('admin/events', 'admin/events/*'),
