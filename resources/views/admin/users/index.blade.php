@@ -1,32 +1,42 @@
 @extends('admin.app')
-@php
-    $title = __('Users');
-@endphp
+
 @section('content')
-<div class="container">
-    <div class="d-flex align-items-end">
-    <h1>{{ $title }}</h1>
-    <a class="btn btn-primary mb-2 ml-auto" href="{{ route('admin.users.create') }}">ユーザーの新規追加</a>
+    <div class="card mb-4">
+        <div class="card-header d-flex align-items-end border-bottom">
+            <h2 class="h4 mb-0">{{ __("ユーザー") }}</h2>
+            <div class="ml-auto">
+                <a class="btn btn-primary btn-sm ml-auto" href="{{ route('admin.users.create') }}">{{ __('ユーザーを追加') }}</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{ __('名前') }}</th>
+                            <th>{{ __('メールアドレス') }}</th>
+                            <th>{{ __('権限') }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if($users->count() > 0)
+                            @foreach ($users as $user)
+                                <tr data-href="{{ url('admin/users/'.$user->id) }}">
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role }}</td>
+                                    <td class="text-right"><a href="{{ url('admin/users/'.$user->id) }}" class="btn btn-secondary btn-sm">{{ __('詳細') }}</a></td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="4">{{ __('ユーザーはいません') }}</td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>{{ __('ID') }}</th>
-                    <th>{{ __('Name') }}</th>
-                    <th>{{ __('Role') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $user)
-                    <tr>
-                        <td>{{ $user->id }}</td>
-                        <td><a href="{{ url('admin/users/'.$user->id) }}">{{ $user->name }}</a></td>
-                        <td>{{ $user->role }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
 @endsection

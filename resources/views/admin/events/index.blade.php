@@ -30,7 +30,9 @@
                                 </tr>
                             @endforeach
                         @else
-                            {{ __('発表会はありません') }}
+                            <tr>
+                                <td colspan="4">{{ __('発表会はありません') }}</td>
+                            </tr>
                         @endif
                     </tbody>
                 </table>
