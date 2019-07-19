@@ -1,7 +1,6 @@
 @extends('admin.app')
 
 @section('content')
-    {{-- 発表会1件の情報 --}}
     <div class="card mb-4">
         <div class="card-header d-flex align-items-end border-bottom">
             <h2 class="h4 mb-0">{{ __("発表会詳細") }}</h2>
@@ -60,7 +59,6 @@
         </div>
     </div>
 
-    {{-- 発表の表示 --}}
     <div class="card">
         <div class="card-body">
             <h3 class="h5 mb-2">{{ __('この発表会の発表') }}</h3>
@@ -83,7 +81,9 @@
                                 </tr>
                             @endforeach
                         @else
-                            {{ __('発表はありません') }}
+                            <tr>
+                                <td class="text-center" colspan="3">{{ __('発表はありません') }}</td>
+                            </tr>
                         @endif
                     </tbody>
                 </table>
