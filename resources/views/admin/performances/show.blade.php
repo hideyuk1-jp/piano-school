@@ -1,7 +1,6 @@
 @extends('admin.app')
 
 @section('content')
-    {{-- 発表会1件の情報 --}}
     <div class="card mb-4">
         <div class="card-header d-flex align-items-end border-bottom">
             <h2 class="h4 mb-0">{{ __("発表詳細") }}</h2>
