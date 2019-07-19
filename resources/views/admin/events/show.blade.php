@@ -52,6 +52,10 @@
                 <dd class="col-md-8">{{ $event->description }}</dd>
                 <dt class="col-md-4">{{ __('作成者') }}</dt>
                 <dd class="col-md-8"><a href="{{ url('admin/users/'.$event->user_id) }}">{{ $event->user->name }}</a></dd>
+                <dt class="col-md-4">{{ __('作成日時') }}</dt>
+                <dd class="col-md-8">{{ $event->created_at }}</dd>
+                <dt class="col-md-4">{{ __('更新日時') }}</dt>
+                <dd class="col-md-8">{{ $event->updated_at }}</dd>
             </dl>
         </div>
     </div>
@@ -65,9 +69,8 @@
                     <thead>
                         <tr>
                             <th>{{ __('発表者') }}</th>
-                            <th>{{ __('曲名') }}</th>
-                            <th>{{ __('作曲者') }}</th>
-                            <th>{{ __('作成者') }}</th>
+                            <th>{{ __('曲') }}</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,9 +78,8 @@
                             @foreach ($event->performances as $performance)
                                 <tr data-href="{{ url('admin/performances/'.$performance->id) }}">
                                     <td><a href="{{ url('admin/users/'.$performance->performer_id) }}">{{ $performance->performer->name }}</a></td>
-                                    <td><a href="{{ url('admin/musics/'.$performance->music_id) }}">{{ $performance->music->title }}</a></td>
-                                    <td>{{ $performance->music->composer }}</td>
-                                    <td><a href="{{ url('admin/users/'.$performance->user_id) }}">{{ $performance->user->name }}</a></td>
+                                    <td><a href="{{ url('admin/musics/'.$performance->music_id) }}">{{ $performance->music->title }}（{{ $performance->music->composer }}）</a></td>
+                                    <td class="text-right"><a href="{{ url('admin/performances/'.$performance->id) }}" class="btn btn-secondary btn-sm">{{ __('詳細') }}</a></td>
                                 </tr>
                             @endforeach
                         @else

@@ -15,7 +15,8 @@
                         <tr>
                             <th>{{ __('日付') }}</th>
                             <th>{{ __('タイトル') }}</th>
-                            <th>{{ __('作成者') }}</th>
+                            <th>{{ __('詳細') }}</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,8 +24,9 @@
                             @foreach ($events as $event)
                                 <tr data-href="{{ url('admin/events/'.$event->id) }}">
                                     <td>{{ $event->date }}</td>
-                                    <td>{{ $event->title }}</a></td>
-                                    <td><a href="{{ url('admin/users/'.$event->user_id) }}">{{ $event->user->name }}</a></td>
+                                    <td>{{ $event->title }}</td>
+                                    <td>{{ $event->description }}</td>
+                                    <td class="text-right"><a href="{{ url('admin/events/'.$event->id) }}" class="btn btn-secondary btn-sm">{{ __('詳細') }}</a></td>
                                 </tr>
                             @endforeach
                         @else
