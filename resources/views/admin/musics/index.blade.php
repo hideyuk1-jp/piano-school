@@ -30,7 +30,9 @@
                                 </tr>
                             @endforeach
                         @else
-                            {{ __('曲はありません') }}
+                            <tr>
+                                <td colspan="4">{{ __('曲はありません') }}</td>
+                            </tr>
                         @endif
                     </tbody>
                 </table>

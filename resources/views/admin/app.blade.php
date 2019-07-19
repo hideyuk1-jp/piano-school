@@ -84,26 +84,28 @@
         <div class="container mt-4">
             <div class="row">
                 <div class="col-lg-4">
+                    @php
+                        $flag = [
+                            "events" => Request::is('admin/events', 'admin/events/*'),
+                            "performances" => Request::is('admin/performances', 'admin/performances/*'),
+                            "users" => Request::is('admin/users', 'admin/users/*'),
+                            "musics" => Request::is('admin/musics', 'admin/musics/*')
+                        ];
+                    @endphp
                     <ul class="list-group mb-4">
-                        @php
-                            $flag = [
-                                "events" => Request::is('admin/events', 'admin/events/*'),
-                                "performances" => Request::is('admin/performances', 'admin/performances/*'),
-                                "users" => Request::is('admin/users', 'admin/users/*'),
-                                "musics" => Request::is('admin/musics', 'admin/musics/*')
-                            ];
-                        @endphp
                         <li class="list-group-item @if($flag["events"]) active @endif">
                             <a @if ($flag["events"]) class="text-light" @endif href="{{ route('admin.events.index') }}">{{ __('発表会') }}</a>
                         </li>
                         <li class="list-group-item @if($flag["performances"]) active @endif">
                             <a @if ($flag["performances"]) class="text-light" @endif href="{{ route('admin.performances.index') }}">{{ __('発表') }}</a>
                         </li>
-                        <li class="list-group-item @if($flag["users"]) active @endif">
-                            <a @if ($flag["users"]) class="text-light" @endif href="{{ route('admin.users.index') }}">{{ __('ユーザー') }}</a>
-                        </li>
                         <li class="list-group-item @if($flag["musics"]) active @endif">
                             <a @if ($flag["musics"]) class="text-light" @endif href="{{ route('admin.musics.index') }}">{{ __('曲') }}</a>
+                        </li>
+                    </ul>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item @if($flag["users"]) active @endif">
+                            <a @if ($flag["users"]) class="text-light" @endif href="{{ route('admin.users.index') }}">{{ __('ユーザー') }}</a>
                         </li>
                     </ul>
                 </div>
