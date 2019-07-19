@@ -17,7 +17,7 @@ Auth::routes();
 
 // 生徒以上を許可
 Route::group(['middleware' => ['auth', 'can:student-higher']], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/', 'EventController@index');
 
     Route::resource('events', 'EventController')->names([
         'index' => 'events.index',

@@ -21,6 +21,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/flatly/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 5 -->
+    <script src="https://kit.fontawesome.com/6b8c04bf69.js"></script>
 </head>
 <body>
     <div id="app">
@@ -88,9 +91,10 @@
                 {{ session('msg_failure') }}
             </div>
         @endif
-        <main class="py-4">
+
+        <div class="container mt-4">
             @yield('content')
-        </main>
+        </div>
     </div>
 </body>
 </html>
