@@ -1,34 +1,42 @@
 @extends('admin.app')
-@php
-    $title = __('Musics');
-@endphp
+
 @section('content')
-<div class="container">
-    <div class="d-flex align-items-end">
-    <h1>{{ $title }}</h1>
-    <a class="btn btn-primary mb-2 ml-auto" href="{{ route('admin.musics.create') }}">曲の新規追加</a>
+    <div class="card mb-4">
+        <div class="card-header d-flex align-items-end border-bottom">
+            <h2 class="h4 mb-0">{{ __("曲") }}</h2>
+            <div class="ml-auto">
+                <a class="btn btn-primary btn-sm ml-auto" href="{{ route('admin.musics.create') }}">{{ __('曲を追加') }}</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{ __('曲名') }}</th>
+                            <th>{{ __('作曲者') }}</th>
+                            <th>{{ __('上限') }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if($musics->count() > 0)
+                            @foreach ($musics as $music)
+                                <tr data-href="{{ url('admin/musics/'.$music->id) }}">
+                                    <td>{{ $music->title }}</td>
+                                    <td>{{ $music->composer }}</td>
+                                    <td>{{ $music->limit }}</td>
+                                    <td class="text-right"><a href="{{ url('admin/musics/'.$music->id) }}" class="btn btn-secondary btn-sm">{{ __('詳細') }}</a></td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="4">{{ __('曲はありません') }}</td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>{{ __('ID') }}</th>
-                    <th>{{ __('Title') }}</th>
-                    <th>{{ __('Composer') }}</th>
-                    <th>{{ __('Limit') }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($musics as $music)
-                    <tr>
-                        <td>{{ $music->id }}</td>
-                        <td><a href="{{ url('admin/musics/'.$music->id) }}">{{ $music->title }}</a></td>
-                        <td>{{ $music->composer }}</td>
-                        <td>{{ $music->limit }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
 @endsection

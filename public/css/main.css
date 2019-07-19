@@ -1,0 +1,3 @@
+tbody tr.clickable:hover td {
+    cursor: pointer;
+}
