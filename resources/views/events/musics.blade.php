@@ -25,7 +25,7 @@
                 <a class="nav-link" href="{{ url('events/'.$event->id) }}">{{ __('発表') }}</a>
             </li>
             <li class="nav-item">
-                <span class="nav-link active">{{ __('追加可能な曲') }}</span>
+                <span class="nav-link active">{{ __('追加する曲を選ぶ') }}</span>
             </li>
         </ul>
 
@@ -40,18 +40,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if($event->addableMusics()->count() > 0)
-                        @foreach ($event->addableMusics() as $music)
+                    @php
+                        $musics = App\Music::all();
+                    @endphp
+                    @if($musics->count() > 0)
+                        @foreach ($musics as $music)
                             <tr>
                                 <td>{{ $music->title }}</td>
                                 <td>{{ $music->composer }}</td>
                                 <td>{{ $event->musicCount($music).' / '.$music->limit }}</td>
-                                <td class="text-right"><a href="{{ url('performances/create?music='.$music->id) }}" class="btn btn-primary btn-sm">{{ __('この曲を追加') }}</a></td>
+                                <td class="text-right">
+                                    @if ($music->isAddable($event))
+                                        <a href="{{ url('performances/create?event='.$event->id.'&music='.$music->id) }}" class="btn btn-primary btn-sm">{{ __('この曲を追加') }}</a>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     @else
                         <tr>
-                            <td class="text-center" colspan="3">{{ __('追加可能な曲はありません') }}</td>
+                            <td class="text-center" colspan="3">{{ __('曲はありません') }}</td>
                         </tr>
                     @endif
                 </tbody>

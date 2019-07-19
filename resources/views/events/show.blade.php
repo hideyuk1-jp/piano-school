@@ -25,7 +25,7 @@
                 <span class="nav-link active">{{ __('発表') }}</span>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('events/'.$event->id.'/addable-musics') }}">{{ __('追加可能な曲') }}</a>
+                <a class="nav-link" href="{{ url('events/'.$event->id.'/musics') }}">{{ __('追加する曲を選ぶ') }}</a>
             </li>
         </ul>
 

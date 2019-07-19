@@ -69,9 +69,9 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function addableMusics(Event $event)
+    public function musics(Event $event)
     {
-        return view('events.addable_musics', ['event' => $event]);
+        return view('events.musics', ['event' => $event]);
     }
 
     /**
