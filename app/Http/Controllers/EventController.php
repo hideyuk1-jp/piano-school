@@ -64,6 +64,17 @@ class EventController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function addableMusics(Event $event)
+    {
+        return view('events.addable_musics', ['event' => $event]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

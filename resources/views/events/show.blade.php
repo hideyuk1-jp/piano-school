@@ -5,8 +5,8 @@
         <div class="card mb-4 p-0">
             <div class="card-body d-flex">
                 <div class="text-center d-flex flex-column">
-                        <div class="h4 text-danger"><i class="fas fa-music"></i></div>
-                        <span class="badge badge-light">{{ $event->performances->count() }}</span>
+                    <div class="h4 text-danger"><i class="fas fa-music"></i></div>
+                    <span class="badge badge-light">{{ $event->performances->count() }}</span>
                 </div>
                 <div class="ml-4">
                     <div class="mb-2">
@@ -47,12 +47,14 @@
                                 <td>{{ $performance->music->title }}</td>
                                 <td>{{ $performance->music->composer }}</td>
                                 <td class="text-right">
-                                    <a href="{{ url('performances/'.$performance->id.'/edit') }}" class="btn btn-primary btn-sm">
-                                        {{ __('編集') }}
-                                    </a>
-                                    <a href="#" class="btn btn-danger btn-sm" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">
-                                        {{ __('削除') }}
-                                    </a>
+                                    @if (Auth::user()->can('admin-higher') OR Auth::user()->id === $performance->user_id)
+                                        <a href="{{ url('performances/'.$performance->id.'/edit') }}" class="btn btn-primary btn-sm">
+                                            {{ __('編集') }}
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-sm" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">
+                                            {{ __('削除') }}
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

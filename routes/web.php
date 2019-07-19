@@ -29,6 +29,8 @@ Route::group(['middleware' => ['auth', 'can:student-higher']], function () {
         'destroy' => 'events.destroy'
     ]);
 
+    Route::get('events/{event}/addable-musics', 'EventController@addableMusics')->name('events.addable_musics');
+
     Route::resource('performances', 'PerformanceController')->names([
         'index' => 'performances.index',
         'create' => 'performances.create',
