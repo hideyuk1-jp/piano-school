@@ -36,10 +36,11 @@ class EventController extends Controller
             ->join('users', 'performances.performer_id', '=', 'users.id')
             ->select('performances.*', 'musics.title as music_title', 'musics.composer as music_composer', 'users.name as performer_name');
         if (is_null($sort) || is_null($order)) {
-            $performances = $performances->orderBy('performer_id', 'asc')->get();
+            $performances = $performances->orderBy('performer_id', 'asc');
         } else {
-            $performances = $performances->orderBy($request->sort, $request->order)->get();
+            $performances = $performances->orderBy($request->sort, $request->order);
         }
+        $performances = $performances->paginate(5);
         return view('events.show', ['event' => $event, 'performances' => $performances, 'sort' => $sort, 'order' => $order]);
     }
 

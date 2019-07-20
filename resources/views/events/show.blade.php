@@ -135,5 +135,8 @@
                 </tbody>
             </table>
         </div>
+        <div class="d-flex justify-content-center">
+            {{ $performances->appends(request()->input())->links() }}
+        </div>
     </div>
 @endsection
