@@ -21,6 +21,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/flatly/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 5 -->
+    <script src="https://kit.fontawesome.com/6b8c04bf69.js"></script>
 </head>
 <body>
     <div id="app">
@@ -50,7 +53,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                    <a class="dropdown-item" href="{{ url('/') }}">
                                         {{ __('通常画面') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -86,7 +89,7 @@
                 <div class="col-lg-4">
                     @php
                         $flag = [
-                            "events" => Request::is('admin/events', 'admin/events/*'),
+                            "events" => Request::is('admin', 'admin/events', 'admin/events/*'),
                             "performances" => Request::is('admin/performances', 'admin/performances/*'),
                             "users" => Request::is('admin/users', 'admin/users/*'),
                             "musics" => Request::is('admin/musics', 'admin/musics/*')
