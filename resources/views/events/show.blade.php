@@ -56,7 +56,7 @@
                                 @slot('order', $order)
                                 @slot('my_sort', 'music_title')
                                 @slot('event', $event)
-                                @slot('text', __('曲'))
+                                @slot('text', __('曲名'))
                             @endcomponent
                         </th>
                         <th>
@@ -81,10 +81,10 @@
                                 <td class="text-right">
                                     @if (Auth::user()->can('admin-higher') OR Auth::user()->id === $performance->user_id)
                                         <a href="{{ url('performances/'.$performance->id.'/edit') }}" class="btn btn-primary btn-sm">
-                                            {{ __('編集') }}
+                                            <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="#" class="btn btn-danger btn-sm" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal-{{ $performance->id }}">
-                                            {{ __('削除') }}
+                                            <i class="fas fa-trash"></i>
                                         </a>
 
                                         <!-- 削除モーダルの設定 -->

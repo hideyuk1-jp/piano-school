@@ -38,16 +38,28 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>{{ __('曲名') }}</th>
-                        <th>{{ __('作曲者') }}</th>
+                        <th>
+                            @component('components.events_musics_th_link')
+                                @slot('sort', $sort)
+                                @slot('order', $order)
+                                @slot('my_sort', 'title')
+                                @slot('event', $event)
+                                @slot('text', __('曲名'))
+                            @endcomponent
+                        <th>
+                            @component('components.events_musics_th_link')
+                                @slot('sort', $sort)
+                                @slot('order', $order)
+                                @slot('my_sort', 'composer')
+                                @slot('event', $event)
+                                @slot('text', __('作曲者'))
+                            @endcomponent
+                        </th>
                         <th>{{ __('登録数') }}</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $musics = App\Music::all();
-                    @endphp
                     @if($musics->count() > 0)
                         @foreach ($musics as $music)
                             <tr>
@@ -56,7 +68,7 @@
                                 <td>{{ $event->musicCount($music).' / '.$music->limit }}</td>
                                 <td class="text-right">
                                     @if ($music->isAddable($event))
-                                        <a href="{{ url('performances/create?event='.$event->id.'&music='.$music->id) }}" class="btn btn-primary btn-sm">{{ __('この曲を追加') }}</a>
+                                        <a href="{{ url('performances/create?event='.$event->id.'&music='.$music->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></a>
                                     @endif
                                 </td>
                             </tr>
@@ -68,6 +80,9 @@
                     @endif
                 </tbody>
             </table>
+        </div>
+        <div class="d-flex justify-content-center">
+            {{ $musics->appends(request()->input())->links() }}
         </div>
     </div>
 @endsection

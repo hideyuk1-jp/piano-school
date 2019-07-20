@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Event;
 use App\Performance;
+use App\Music;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -40,7 +41,7 @@ class EventController extends Controller
         } else {
             $performances = $performances->orderBy($request->sort, $request->order);
         }
-        $performances = $performances->paginate(5);
+        $performances = $performances->paginate(50);
         return view('events.show', ['event' => $event, 'performances' => $performances, 'sort' => $sort, 'order' => $order]);
     }
 
@@ -50,8 +51,16 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function musics(Event $event)
+    public function musics(Event $event, Request $request)
     {
-        return view('events.musics', ['event' => $event]);
+        $sort = $request->sort;
+        $order = $request->order;
+        if (is_null($sort) || is_null($order)) {
+            $musics = Music::orderBy('id', 'asc');
+        } else {
+            $musics = Music::orderBy($request->sort, $request->order);
+        }
+        $musics = $musics->paginate(50);
+        return view('events.musics', ['event' => $event, 'musics' => $musics, 'sort' => $sort, 'order' => $order]);
     }
 }
