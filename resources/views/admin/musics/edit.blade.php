@@ -13,19 +13,37 @@
                 <div class="form-group row">
                     <label for="composer" class="col-md-4 col-form-label font-weight-bold">{{ __('曲名') }}</label>
                     <div class="col-md-8">
-                        <input id="title" type="text" class="form-control" name="title" value="{{ $music->title }}" required autofocus>
+                        <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $music->title }}" required autofocus>
+
+                        @error('title')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="date" class="col-md-4 col-form-label font-weight-bold">{{ __('作曲者') }}</label>
+                    <label for="composer" class="col-md-4 col-form-label font-weight-bold">{{ __('作曲者') }}</label>
                     <div class="col-md-8">
-                        <input id="composer" type="text" class="form-control" name="composer" value="{{ $music->composer }}" required>
+                        <input id="composer" type="text" class="form-control @error('composer') is-invalid @enderror" name="composer" value="{{ $music->composer }}" required>
+
+                        @error('composer')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="limit" class="col-md-4 col-form-label font-weight-bold">{{ __('上限') }}</label>
                     <div class="col-md-8">
-                        <input id="limit" type="number" min="1" class="form-control" name="limit" value="{{ $music->limit }}" required>
+                        <input id="limit" type="number" min="1" class="form-control @error('limit') is-invalid @enderror" name="limit" value="{{ $music->limit }}" required>
+
+                        @error('limit')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-group row mb-0">
