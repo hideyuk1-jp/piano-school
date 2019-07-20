@@ -13,19 +13,6 @@ use Illuminate\Support\Facades\Auth;
 class PerformanceController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        /*
-        $performances = Performance::all();
-        return view('performances.index', ['performances' => $performances]);
-        */
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -35,16 +22,8 @@ class PerformanceController extends Controller
         $performers = User::where('role', 15)->get();
         $music_id = intval($request->music);
         $event_id = intval($request->event);
-        if ($request->music === NULL) {
-            $musics = Music::all();
-        } else {
-            $musics = Music::where('id', $music_id)->get();
-        }
-        if ($request->event === NULL) {
-            $events = Event::orderBy('date', 'desc')->get();
-        } else {
-            $events = Event::where('id', $event_id)->get();
-        }
+        $musics = Music::all();
+        $events = Event::orderBy('date', 'desc')->get();
 
         return view('performances.create', ['performers' => $performers, 'musics' => $musics, 'events' => $events, 'music_id' => $music_id, 'event_id' => $event_id]);
     }
@@ -76,19 +55,6 @@ class PerformanceController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Performance $performance)
-    {
-        /*
-        return view('admin.performances.show', ['performance' => $performance]);
-        */
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -115,7 +81,7 @@ class PerformanceController extends Controller
         $music = Music::find($request->music);
         $event = Event::find($request->event);
 
-        if (!$music->isAddable($event)) {
+        if (!$music->isAddable($event, $performance)) {
             session()->flash('msg_failure', '曲数が上限に達しています');
             return redirect('performances/'.$performance->id.'/edit');
         }
@@ -136,10 +102,8 @@ class PerformanceController extends Controller
      */
     public function destroy(Performance $performance)
     {
-        /*
         $performance->delete();
         session()->flash('msg_success', '発表を削除しました');
-        return redirect('admin/performances');
-        */
+        return redirect('events/'.$performance->event_id);
     }
 }

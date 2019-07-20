@@ -30,9 +30,11 @@
             <li class="nav-item">
                 <span class="nav-link active">{{ __('発表') }}</span>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('events/'.$event->id.'/musics') }}">{{ __('追加する曲を選ぶ') }}</a>
-            </li>
+            @can('teacher-higher')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('events/'.$event->id.'/musics') }}">{{ __('追加する曲を選ぶ') }}</a>
+                </li>
+            @endcan
         </ul>
 
         <div class="table-responsive">
@@ -57,9 +59,46 @@
                                         <a href="{{ url('performances/'.$performance->id.'/edit') }}" class="btn btn-primary btn-sm">
                                             {{ __('編集') }}
                                         </a>
-                                        <a href="#" class="btn btn-danger btn-sm" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal">
+                                        <a href="#" class="btn btn-danger btn-sm" class="btn btn-primary" data-toggle="modal" data-target="#deleteModal-{{ $performance->id }}">
                                             {{ __('削除') }}
                                         </a>
+
+                                        <!-- 削除モーダルの設定 -->
+                                        <div class="modal fade text-left" id="deleteModal-{{ $performance->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">{{ __('発表の削除')}}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('閉じる') }}">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>{{ __('この発表を削除します') }}</p>
+                                                        <dl class="row mb-0">
+                                                            <dt class="col-md-4">{{ __('ID') }}</dt>
+                                                            <dd class="col-md-8">{{ $performance->id }}</dd>
+                                                            <dt class="col-md-4">{{ __('発表者') }}</dt>
+                                                            <dd class="col-md-8">{{ $performance->performer->name }}</dd>
+                                                            <dt class="col-md-4">{{ __('曲') }}</dt>
+                                                            <dd class="col-md-8">{{ $performance->music->title }}</dd>
+                                                            <dt class="col-md-4">{{ __('発表会') }}</dt>
+                                                            <dd class="col-md-8">{{ $performance->event->title }}</dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">{{ __('閉じる') }}</button>
+                                                        <form style="display:inline" action="{{ url('performances/'.$performance->id) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                                {{ __('削除') }}
+                                                            </button>
+                                                        </form>
+                                                    </div><!-- /.modal-footer -->
+                                                </div><!-- /.modal-content -->
+                                            </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
                                     @endif
                                 </td>
                             </tr>
@@ -73,30 +112,4 @@
             </table>
         </div>
     </div>
-    <!-- 削除モーダルの設定 -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">{{ __('発表の削除')}}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('閉じる') }}">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>{{ __('発表を削除します') }}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">{{ __('閉じる') }}</button>
-                        <form style="display:inline" action="{{ url('performances/'.$performance->id) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                {{ __('削除') }}
-                            </button>
-                        </form>
-                    </div><!-- /.modal-footer -->
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-    @endsection
+@endsection

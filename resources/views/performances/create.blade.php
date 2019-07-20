@@ -4,6 +4,12 @@
     <div class="col-md-8 offset-md-2">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">ホーム</a></li>
+            @if (!is_null($event_id) && !is_null(App\Event::find($event_id)))
+                @php
+                    $event_title = App\Event::find($event_id)->title;
+                @endphp
+                <li class="breadcrumb-item"><a href="{{ url('events/'.$event_id) }}">{{ $event_title }}</a></li>
+            @endif
             <li class="breadcrumb-item active" aria-current="page">{{ __('発表を追加') }}</li>
         </ol>
         <div class="card mb-4 p-0">
