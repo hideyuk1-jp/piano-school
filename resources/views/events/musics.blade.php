@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="col-md-8 offset-md-2">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">ホーム</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('events/'.$event->id) }}">{{ $event->title }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ __('追加する曲を選ぶ') }}</li>
+        </ol>
         <div class="card mb-4 p-0">
             <div class="card-body d-flex">
                 <div class="text-center d-flex flex-column">

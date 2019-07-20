@@ -17,7 +17,7 @@ Auth::routes();
 
 // 生徒以上を許可
 Route::group(['middleware' => ['auth', 'can:student-higher']], function () {
-    Route::get('/', 'EventController@index');
+    Route::get('/', 'EventController@index')->name('home');
 
     Route::resource('events', 'EventController')->names([
         'index' => 'events.index',
@@ -44,6 +44,8 @@ Route::group(['middleware' => ['auth', 'can:student-higher']], function () {
 
 // 管理者以上のみ許可
 Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
+    Route::get('admin', 'Admin\EventController@index')->name('admin.home');
+
     Route::resource('admin/users', 'Admin\UserController')->names([
         'index' => 'admin.users.index',
         'create' => 'admin.users.create',

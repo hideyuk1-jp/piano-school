@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="col-md-8 offset-md-2">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url('/') }}">ホーム</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ $event->title }}</li>
+            </ol>
+        </nav>
         <div class="card mb-4 p-0">
             <div class="card-body d-flex">
                 <div class="text-center d-flex flex-column">

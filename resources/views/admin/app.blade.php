@@ -89,7 +89,7 @@
                 <div class="col-lg-4">
                     @php
                         $flag = [
-                            "events" => Request::is('admin/events', 'admin/events/*'),
+                            "events" => Request::is('admin', 'admin/events', 'admin/events/*'),
                             "performances" => Request::is('admin/performances', 'admin/performances/*'),
                             "users" => Request::is('admin/users', 'admin/users/*'),
                             "musics" => Request::is('admin/musics', 'admin/musics/*')

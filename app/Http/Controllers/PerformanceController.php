@@ -19,9 +19,10 @@ class PerformanceController extends Controller
      */
     public function index()
     {
+        /*
         $performances = Performance::all();
-
         return view('performances.index', ['performances' => $performances]);
+        */
     }
 
     /**
@@ -29,15 +30,23 @@ class PerformanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        /*
         $performers = User::where('role', 15)->get();
-        $musics = Music::all();
-        $events = Event::all();
+        $music_id = intval($request->music);
+        $event_id = intval($request->event);
+        if ($request->music === NULL) {
+            $musics = Music::all();
+        } else {
+            $musics = Music::where('id', $music_id)->get();
+        }
+        if ($request->event === NULL) {
+            $events = Event::orderBy('date', 'desc')->get();
+        } else {
+            $events = Event::where('id', $event_id)->get();
+        }
 
-        return view('admin.performances.create', ['performers' => $performers, 'musics' => $musics, 'events' => $events]);
-        */
+        return view('performances.create', ['performers' => $performers, 'musics' => $musics, 'events' => $events, 'music_id' => $music_id, 'event_id' => $event_id]);
     }
 
     /**
@@ -48,13 +57,12 @@ class PerformanceController extends Controller
      */
     public function store(Request $request)
     {
-        /*
-        $count = Performance::where('music_id', $request->music)->where('event_id', $request->event)->count();
-        $limit = Music::find($request->music)->limit;
+        $music = Music::find($request->music);
+        $event = Event::find($request->event);
 
-        if ($count >= $limit) {
+        if (!$music->isAddable($event)) {
             session()->flash('msg_failure', '曲数が上限に達しています');
-            return redirect('admin/performances/create');
+            return redirect('performances/create');
         }
 
         $performance = new Performance;
@@ -64,8 +72,7 @@ class PerformanceController extends Controller
         $performance->user_id = Auth::id();
         $performance->save();
         session()->flash('msg_success', '発表を新規追加しました');
-        return redirect('admin/performances/'.$performance->id);
-        */
+        return redirect('events/'.$request->event);
     }
 
     /**
@@ -89,13 +96,11 @@ class PerformanceController extends Controller
      */
     public function edit(Performance $performance)
     {
-        /*
         $performers = User::where('role', 15)->get();
         $musics = Music::all();
         $events = Event::all();
 
-        return view('admin.performances.edit', ['performance' => $performance, 'performers' => $performers, 'musics' => $musics, 'events' => $events]);
-        */
+        return view('performances.edit', ['performance' => $performance, 'performers' => $performers, 'musics' => $musics, 'events' => $events]);
     }
 
     /**
@@ -107,14 +112,12 @@ class PerformanceController extends Controller
      */
     public function update(Request $request, Performance $performance)
     {
-        /*
         $performance->performer_id = $request->performer;
         $performance->music_id = $request->music;
         $performance->event_id = $request->event;
         $performance->save();
         session()->flash('msg_success', '発表を更新しました');
-        return redirect('admin/performances/'.$performance->id);
-        */
+        return redirect('events/'.$performance->event_id);
     }
 
     /**
