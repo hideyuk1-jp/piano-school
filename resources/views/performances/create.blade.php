@@ -18,7 +18,7 @@
                             <select name="performer" id="performer" class="form-control @error('performer') is-invalid @enderror" required autocomplete="performer">
                                 <option value="">{{ __('選択してください') }}</option>
                                 @foreach ($performers as $performer)
-                                    <option value="{{ $performer->id }}">{{ $performer->name }}</option>
+                                    <option value="{{ $performer->id }}" @if (intval(old('performer')) === $performer->id) selected @endif>{{ $performer->name }}</option>
                                 @endforeach
                             </select>
 
@@ -37,7 +37,7 @@
                             <select name="music" id="music" class="form-control @error('music') is-invalid @enderror" required autocomplete="music">
                                 <option value="">{{ __('選択してください') }}</option>
                                 @foreach ($musics as $music)
-                                    <option value="{{ $music->id }}" @if ($music_id === $music->id) selected @endif>{{ $music->title }} （{{ $music->composer }}）</option>
+                                    <option value="{{ $music->id }}" @if ($music_id === $music->id OR intval(old('music')) === $music->id) selected @endif>{{ $music->title }} （{{ $music->composer }}）</option>
                                 @endforeach
                             </select>
 
@@ -57,7 +57,7 @@
                             <select name="event" id="event" class="form-control @error('event') is-invalid @enderror" required autocomplete="event">
                                 <option value="">{{ __('選択してください') }}</option>
                                 @foreach ($events as $event)
-                                    <option value="{{ $event->id }}" @if ($event_id === $event->id) selected @endif>{{ $event->title }} （{{ $event->date }}）</option>
+                                    <option value="{{ $event->id }}" @if ($event_id === $event->id OR intval(old('event')) === $event->id) selected @endif>{{ $event->title }} （{{ $event->date }}）</option>
                                 @endforeach
                             </select>
 

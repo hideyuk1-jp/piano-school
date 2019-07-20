@@ -62,7 +62,7 @@ class PerformanceController extends Controller
 
         if (!$music->isAddable($event)) {
             session()->flash('msg_failure', '曲数が上限に達しています');
-            return redirect('performances/create');
+            return back()->withInput();
         }
 
         $performance = new Performance;
@@ -98,7 +98,7 @@ class PerformanceController extends Controller
     {
         $performers = User::where('role', 15)->get();
         $musics = Music::all();
-        $events = Event::all();
+        $events = Event::orderBy('date', 'desc')->get();
 
         return view('performances.edit', ['performance' => $performance, 'performers' => $performers, 'musics' => $musics, 'events' => $events]);
     }
@@ -112,6 +112,14 @@ class PerformanceController extends Controller
      */
     public function update(Request $request, Performance $performance)
     {
+        $music = Music::find($request->music);
+        $event = Event::find($request->event);
+
+        if (!$music->isAddable($event)) {
+            session()->flash('msg_failure', '曲数が上限に達しています');
+            return redirect('performances/'.$performance->id.'/edit');
+        }
+
         $performance->performer_id = $request->performer;
         $performance->music_id = $request->music;
         $performance->event_id = $request->event;
