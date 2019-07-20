@@ -12,23 +12,15 @@ class PerformancesTableSeeder extends Seeder
      */
     public function run()
     {
-        Performance::create([
-            'event_id' => 1,
-            'user_id' => 1,
-            'performer_id' => 32,
-            'music_id' => 1
-        ]);
-        Performance::create([
-            'event_id' => 1,
-            'user_id' => 2,
-            'performer_id' => 33,
-            'music_id' => 2
-        ]);
-        Performance::create([
-            'event_id' => 1,
-            'user_id' => 3,
-            'performer_id' => 34,
-            'music_id' => 3
-        ]);
+        for ($i = 0; $i < 30; $i++) {
+            for ($j = 1; $j <= 3; $j++) {
+                Performance::create([
+                    'event_id' => $j,
+                    'user_id' => 1 + $i,
+                    'performer_id' => 32 + $i,
+                    'music_id' => 1 + $i
+                ]);
+            }
+        }
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Event;
+use App\Performance;
+use App\Music;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -26,9 +28,21 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Event $event, Request $request)
     {
-        return view('events.show', ['event' => $event]);
+        $sort = $request->sort;
+        $order = $request->order;
+        $performances = Performance::where('event_id', $event->id)
+            ->join('musics', 'performances.music_id', '=', 'musics.id')
+            ->join('users', 'performances.performer_id', '=', 'users.id')
+            ->select('performances.*', 'musics.title as music_title', 'musics.composer as music_composer', 'users.name as performer_name');
+        if (is_null($sort) || is_null($order)) {
+            $performances = $performances->orderBy('performer_id', 'asc');
+        } else {
+            $performances = $performances->orderBy($request->sort, $request->order);
+        }
+        $performances = $performances->paginate(50);
+        return view('events.show', ['event' => $event, 'performances' => $performances, 'sort' => $sort, 'order' => $order]);
     }
 
     /**
@@ -37,8 +51,16 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function musics(Event $event)
+    public function musics(Event $event, Request $request)
     {
-        return view('events.musics', ['event' => $event]);
+        $sort = $request->sort;
+        $order = $request->order;
+        if (is_null($sort) || is_null($order)) {
+            $musics = Music::orderBy('id', 'asc');
+        } else {
+            $musics = Music::orderBy($request->sort, $request->order);
+        }
+        $musics = $musics->paginate(50);
+        return view('events.musics', ['event' => $event, 'musics' => $musics, 'sort' => $sort, 'order' => $order]);
     }
 }
