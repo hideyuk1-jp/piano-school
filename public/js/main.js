@@ -15,4 +15,13 @@
         });
     });
 
+    // カードのリンク化
+    $(function(){
+        $('.card[data-href]').addClass('clickable').click(function(e) {
+            if(!$(e.target).is('a')){
+                window.location = $(e.target).closest('.card').data('href');
+            };
+        });
+    });
+
 })();
