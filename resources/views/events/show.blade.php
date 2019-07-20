@@ -41,15 +41,39 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>{{ __('発表者') }}</th>
-                        <th>{{ __('曲') }}</th>
-                        <th>{{ __('作曲者') }}</th>
+                        <th>
+                            @component('components.events_th_link')
+                                @slot('sort', $sort)
+                                @slot('order', $order)
+                                @slot('my_sort', 'performer_name')
+                                @slot('event', $event)
+                                @slot('text', __('発表者'))
+                            @endcomponent
+                        </th>
+                        <th>
+                            @component('components.events_th_link')
+                                @slot('sort', $sort)
+                                @slot('order', $order)
+                                @slot('my_sort', 'music_title')
+                                @slot('event', $event)
+                                @slot('text', __('曲'))
+                            @endcomponent
+                        </th>
+                        <th>
+                            @component('components.events_th_link')
+                                @slot('sort', $sort)
+                                @slot('order', $order)
+                                @slot('my_sort', 'music_composer')
+                                @slot('event', $event)
+                                @slot('text', __('作曲者'))
+                            @endcomponent
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @if($event->performances->count() > 0)
-                        @foreach ($event->performances as $performance)
+                    @if($performances->count() > 0)
+                        @foreach ($performances as $performance)
                             <tr>
                                 <td>{{ $performance->performer->name }}</td>
                                 <td>{{ $performance->music->title }}</td>
