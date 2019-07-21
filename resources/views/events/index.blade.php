@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-8 offset-md-2">
+    <div class="col-lg-8 offset-lg-2">
         <h2 class="h4 border-bottom pb-2 mb-4">{{ __('発表会') }}</h2>
         @foreach ($events as $event)
             <div class="card mb-4 p-0" data-href="{{ url('events/'.$event->id) }}">

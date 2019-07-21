@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-8 offset-md-2">
+    <div class="col-lg-8 offset-lg-2">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">ホーム</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">{{ __('ホーム') }}</a></li>
             @if (!is_null($event_id) && !is_null(App\Event::find($event_id)))
                 @php
                     $event_title = App\Event::find($event_id)->title;

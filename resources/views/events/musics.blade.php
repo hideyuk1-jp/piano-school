@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-8 offset-md-2">
+    <div class="col-lg-8 offset-lg-2">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">ホーム</a></li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">{{ __('ホーム') }}</a></li>
             <li class="breadcrumb-item"><a href="{{ url('events/'.$event->id) }}">{{ $event->title }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ __('追加する曲を選ぶ') }}</li>
         </ol>
@@ -62,7 +62,7 @@
                 <tbody>
                     @if($musics->count() > 0)
                         @foreach ($musics as $music)
-                            <tr>
+                            <tr @if ($event->isAddableMusic($music)) data-href="{{ url('performances/create?event='.$event->id.'&music='.$music->id) }}" @endif>
                                 <td>{{ $music->title }}</td>
                                 <td>{{ $music->composer }}</td>
                                 <td>{{ $event->musicCount($music).' / '.$music->limit }}</td>
