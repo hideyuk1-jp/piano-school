@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\PerformanceRequest;
 use App\Performance;
 use App\User;
 use App\Music;
@@ -44,16 +45,8 @@ class PerformanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PerformanceRequest $request)
     {
-        $count = Performance::where('music_id', $request->music)->where('event_id', $request->event)->count();
-        $limit = Music::find($request->music)->limit;
-
-        if ($count >= $limit) {
-            session()->flash('msg_failure', '曲数が上限に達しています');
-            return redirect('admin/performances/create');
-        }
-
         $performance = new Performance;
         $performance->performer_id = $request->performer;
         $performance->music_id = $request->music;
@@ -97,7 +90,7 @@ class PerformanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Performance $performance)
+    public function update(PerformanceRequest $request, Performance $performance)
     {
         $performance->performer_id = $request->performer;
         $performance->music_id = $request->music;

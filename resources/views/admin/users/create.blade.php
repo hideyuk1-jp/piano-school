@@ -68,10 +68,10 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="password-confirm" class="col-md-4 col-form-label font-weight-bold">{{ __('確認用パスワード') }}</label>
+                    <label for="password-confirmation" class="col-md-4 col-form-label font-weight-bold">{{ __('確認用パスワード') }}</label>
 
                     <div class="col-md-8">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <input id="password-confirmation" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                     </div>
                 </div>
 

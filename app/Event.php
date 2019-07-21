@@ -23,9 +23,19 @@ class Event extends Model
         return $this->hasMany('App\Performance')->latest();
     }
 
-    public function musicCount(Music $music)
+    public function musicCount(Music $music, Performance $my_performance = NULL)
     {
-        return Performance::where('music_id', $music->id)->where('event_id', $this->id)->count();
+        if (is_null($my_performance)) {
+            return Performance::where('music_id', $music->id)->where('event_id', $this->id)->count();
+        } else {
+            // 自分自身をカウントしない
+            return Performance::where('id', '<>', $my_performance->id)->where('music_id', $music->id)->where('event_id', $this->id)->count();
+        }
+    }
+
+    public function isAddableMusic(Music $music, Performance $my_performance = NULL)
+    {
+        return $this->musicCount($music, $my_performance) < $music->limit;
     }
 
     public function addableMusics()

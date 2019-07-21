@@ -29,6 +29,10 @@ Route::group(['middleware' => ['auth', 'can:teacher-higher']], function () {
 
     Route::get('performances/create', 'PerformanceController@create')->name('performances.create');
     Route::post('performances/store', 'PerformanceController@store')->name('performances.store');
+});
+
+// 管理者以上か作成者を許可
+Route::group(['middleware' => ['auth', 'can:admin-higher-or-owner,performance']], function () {
     Route::get('performances/{performance}/edit', 'PerformanceController@edit')->name('performances.edit');
     Route::put('performances/{performance}', 'PerformanceController@update')->name('performances.update');
     Route::delete('performances/{performance}', 'PerformanceController@destroy')->name('performances.destroy');

@@ -79,7 +79,7 @@
                                 <td>{{ $performance->music->title }}</td>
                                 <td>{{ $performance->music->composer }}</td>
                                 <td class="text-right">
-                                    @if (Auth::user()->can('admin-higher') OR Auth::user()->id === $performance->user_id)
+                                    @if (Auth::user()->can('admin-higher') OR Auth::user()->can('owner', $performance))
                                         <a href="{{ url('performances/'.$performance->id.'/edit') }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
