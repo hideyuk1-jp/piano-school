@@ -67,7 +67,7 @@
                                 <td>{{ $music->composer }}</td>
                                 <td>{{ $event->musicCount($music).' / '.$music->limit }}</td>
                                 <td class="text-right">
-                                    @if ($music->isAddable($event))
+                                    @if ($event->isAddableMusic($music))
                                         <a href="{{ url('performances/create?event='.$event->id.'&music='.$music->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i></a>
                                     @endif
                                 </td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\PerformanceRequest;
 use App\Performance;
 use App\User;
 use App\Music;
@@ -34,16 +35,8 @@ class PerformanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PerformanceRequest $request)
     {
-        $music = Music::find($request->music);
-        $event = Event::find($request->event);
-
-        if (!$music->isAddable($event)) {
-            session()->flash('msg_failure', '曲数が上限に達しています');
-            return back()->withInput();
-        }
-
         $performance = new Performance;
         $performance->performer_id = $request->performer;
         $performance->music_id = $request->music;
@@ -76,16 +69,8 @@ class PerformanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Performance $performance)
+    public function update(PerformanceRequest $request, Performance $performance)
     {
-        $music = Music::find($request->music);
-        $event = Event::find($request->event);
-
-        if (!$music->isAddable($event, $performance)) {
-            session()->flash('msg_failure', '曲数が上限に達しています');
-            return redirect('performances/'.$performance->id.'/edit');
-        }
-
         $performance->performer_id = $request->performer;
         $performance->music_id = $request->music;
         $performance->event_id = $request->event;
