@@ -25,9 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-          // 開発者のみ許可
+        // 開発者のみ許可
         Gate::define('system-only', function ($user) {
-            return ($user->role == 1);
+            return ($user->role === 1);
         });
         // 管理者以上（管理者＆システム管理者）に許可
         Gate::define('admin-higher', function ($user) {
@@ -41,5 +41,16 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('student-higher', function ($user) {
             return ($user->role > 0 && $user->role <= 15);
         });
+
+        // 作成者のみ許可
+        Gate::define('owner', function ($user, $post) {
+            return ($user->id === $post->user_id);
+        });
+
+        // 管理者以上または作成者に許可
+        Gate::define('admin-higher-or-owner', function ($user, $post) {
+            return  ($user->role > 0 && $user->role <= 5) || ($user->id === $post->user_id);
+        });
+
     }
 }
