@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-8 offset-md-2">
+    <div class="col-lg-8 offset-lg-2">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/') }}">ホーム</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/') }}">{{ __('ホーム') }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $event->title }}</li>
             </ol>
         </nav>
