@@ -62,7 +62,7 @@
                 <tbody>
                     @if($musics->count() > 0)
                         @foreach ($musics as $music)
-                            <tr>
+                            <tr @if ($event->isAddableMusic($music)) data-href="{{ url('performances/create?event='.$event->id.'&music='.$music->id) }}" @endif>
                                 <td>{{ $music->title }}</td>
                                 <td>{{ $music->composer }}</td>
                                 <td>{{ $event->musicCount($music).' / '.$music->limit }}</td>
