@@ -1,4 +1,4 @@
-@extends('admin.app')
+@extends('layouts.app')
 
 @section('content')
     <div class="card mb-4">
