@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/macos,laravel,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=macos,laravel,visualstudiocode
+# Created by https://www.gitignore.io/api/macos,laravel,vagrant,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=macos,laravel,vagrant,visualstudiocode
 
 ### Laravel ###
 /vendor/
@@ -50,6 +50,16 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+### Vagrant ###
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.log
+
+### Vagrant Patch ###
+*.box
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -61,4 +71,4 @@ Temporary Items
 # Ignore all local history of files
 .history
 
-# End of https://www.gitignore.io/api/macos,laravel,visualstudiocode
+# End of https://www.gitignore.io/api/macos,laravel,vagrant,visualstudiocode
